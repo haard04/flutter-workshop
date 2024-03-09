@@ -1,3 +1,9 @@
+import 'package:demo_app/charts.dart';
+import 'package:demo_app/listviewSatellites.dart';
+import 'package:demo_app/model.dart';
+import 'package:demo_app/satelliteWidget.dart';
+import 'package:demo_app/satellites.dart';
+import 'package:demo_app/service.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
@@ -47,12 +53,35 @@ class Home extends StatelessWidget {
           ),
           Row(
             children: [
-              ElevatedButton(onPressed: (){
+              ElevatedButton(onPressed: ()async{
+
+                List<Satellites> satellites = [];
+                satellites= await fetchSatellites();
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),));
                 Navigator.pushAndRemoveUntil(context,
-                MaterialPageRoute(builder: (context) =>  Home()),(Route<dynamic> route) => false,
+                MaterialPageRoute(builder: (context) =>  SatelliteList(satellites)),(Route<dynamic> route) => false,
         );
-              }, child: Text('Button'))
+              }, child: Text('Loop'))
+            ],
+          ),
+          Row(
+            children: [
+              ElevatedButton(onPressed: ()async{
+
+                List<Satellites> satellites = [];
+                satellites= await fetchSatellites();
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => SatelliteListView(satellites),));
+               
+              }, child: Text('ListView'))
+            ],
+          ),
+          Row(
+            children: [
+              ElevatedButton(onPressed: ()async{
+
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => Charts(),));
+               
+              }, child: Text('Charts'))
             ],
           ),
           Row(
