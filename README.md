@@ -364,5 +364,75 @@
     ```
     ```
     ```
-    33)   syncfusion_flutter_charts: ^21.1.37
-    34)   
+    33)   syncfusion_flutter_charts: ^21.1.37```
+    34)   Permission Handler
+        ```
+         https://pub.dev/packages/geolocator
+         ```
+         ```
+  geolocator: ^10.1.0
+         ```
+Android -> gradle.properties
+   ```
+android.useAndroidX=true
+android.enableJetifier=true
+```
+android/app/build.gradle
+```
+android {
+  compileSdkVersion 33
+
+  ...
+}
+```
+Android->app->src->main-> androidmanifest.xml
+```
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+```
+
+main.dart
+```
+
+WidgetsFlutterBinding.ensureInitialized();
+  bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    LocationPermission permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      print('Give Location');
+  }
+  }
+```
+function to get lat and long 
+```
+     double latitude=0;
+     double longitude=0;
+
+
+     GeolocatorPlatform geolocator = GeolocatorPlatform.instance;
+
+       Future getUserLocation() async {
+    try {
+      Position userLocation = await geolocator.getCurrentPosition();
+      latitude = userLocation.latitude;
+      longitude = userLocation.longitude;
+
+      print("Latitude: $latitude, Longitude: $longitude");
+```
+35) Geocoding
+    ```
+      geocoding: ^2.1.0
+    ```
+
+   ```
+
+import 'package:geocoding/geocoding.dart';
+
+List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+      print(placemarks[0].subLocality);
+      city = placemarks[0].locality.toString();
+      print(city);
+      print(placemarks[0].country);
+      print(placemarks[0].postalCode);
+```
+    
