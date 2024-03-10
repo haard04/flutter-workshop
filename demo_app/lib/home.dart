@@ -6,6 +6,9 @@ import 'package:demo_app/satellites.dart';
 import 'package:demo_app/service.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+
 
 class Home extends StatelessWidget {
    Home({Key? key}) : super(key: key);
@@ -13,6 +16,41 @@ class Home extends StatelessWidget {
   TextEditingController fieldTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String city='';
+     double latitude=0;
+     double longitude=0;
+
+
+     GeolocatorPlatform geolocator = GeolocatorPlatform.instance;
+
+       Future getUserLocation() async {
+    try {
+      Position userLocation = await geolocator.getCurrentPosition();
+      latitude = userLocation.latitude;
+      longitude = userLocation.longitude;
+
+      print("Latitude: $latitude, Longitude: $longitude");
+      
+
+      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+      print(placemarks[0].subLocality);
+      city = placemarks[0].locality.toString();
+      print(city);
+      print(placemarks[0].country);
+      print(placemarks[0].postalCode);
+      return city;
+
+
+
+    } catch (e) {
+      // Handle errors, such as when the user denies location permission.
+      print("Error getting location: $e");
+      throw e;
+    }
+  }
+
+   
+
 
     String fieldText ;
     fieldText= fieldTextController.text;
@@ -116,6 +154,14 @@ class Home extends StatelessWidget {
                 },
                 child:Icon(Icons.abc)
               )
+            ],
+          ),
+          Row(
+            children: [
+              ElevatedButton(onPressed: ()async{
+                await getUserLocation();
+
+              }, child: Text('Location'))
             ],
           )
         ]),
