@@ -3,19 +3,19 @@
 
 Basic Flutter Commands 
 
-Flutter create <directory> name -> creatring flutter app
-Flutter run -> running app
-Flutter clean -> deleting flutter dependecies
+##### Flutter create <directory> name -> creatring flutter app
+##### Flutter run -> running app
+##### Flutter clean -> deleting flutter dependecies
 
-R -> hot restart
-r -> reload
-q -> quit
+##### R -> hot restart
+##### r -> reload
+##### q -> quit
 
-Flutter build apk -> creating apk
-flutter doctor -> checking the issues
+##### Flutter build apk -> creating apk
+##### flutter doctor -> checking the issues
 
-flutter pub get
-flutter pub add
+##### flutter pub get
+##### flutter pub add
 
 
 
