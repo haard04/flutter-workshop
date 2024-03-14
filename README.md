@@ -1,5 +1,24 @@
 # flutter-workshop
 
+
+Basic Flutter Commands 
+
+Flutter create <directory> name -> creatring flutter app
+Flutter run -> running app
+Flutter clean -> deleting flutter dependecies
+
+R -> hot restart
+r -> reload
+q -> quit
+
+Flutter build apk -> creating apk
+flutter doctor -> checking the issues
+
+flutter pub get
+flutter pub add
+
+
+
 1) Create Git Repo
 2) Clone Git Repo
 3) View -> Command paleatte (ctrl+shift+p)  ->  Flutter: New Project -> Application -> Name
